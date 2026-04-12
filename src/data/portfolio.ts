@@ -17,7 +17,7 @@ export const projects: Project[] = [
     tech: ["React", "TypeScript", "SEO", "Analytics"],
     screenshot: "/images/projects/health-decoded.png",
     frame: "browser",
-    href: "https://github.com/RyanPurakal/healthdecoded",
+    href: "https://healthdecodedinitiative.org",
   },
   {
     title: "56 Card Game",
