@@ -89,7 +89,7 @@ export function ImageAutoSlider({
         }
       >
         <div
-          className="image-auto-slider-track flex w-max gap-3 sm:gap-4 md:gap-5"
+          className="image-auto-slider-track flex w-max gap-2.5 sm:gap-4 md:gap-5"
           style={
             {
               "--slider-duration": `${duration}s`,
@@ -99,13 +99,13 @@ export function ImageAutoSlider({
           {loopItems.map((item, index) => (
             <div
               key={`${item.src}-${index}`}
-              className="group relative h-52 w-[13.5rem] shrink-0 overflow-hidden rounded-lg shadow-lg transition-[transform,filter] duration-300 ease-out sm:h-56 sm:w-60 md:h-64 md:w-[17rem] lg:h-72 lg:w-80 xl:h-80 xl:w-[22rem] hover:scale-[1.03] hover:brightness-[1.06]"
+              className="group relative h-44 w-[11rem] shrink-0 overflow-hidden rounded-lg shadow-lg transition-[transform,filter] duration-300 ease-out sm:h-56 sm:w-60 md:h-64 md:w-[17rem] lg:h-72 lg:w-80 xl:h-80 xl:w-[22rem] hover:scale-[1.03] hover:brightness-[1.06]"
             >
               <Image
                 src={item.src}
                 alt={item.alt}
                 fill
-                sizes="(max-width: 640px) 216px, (max-width: 1024px) 272px, 352px"
+                sizes="(max-width: 640px) 176px, (max-width: 1024px) 272px, 352px"
                 className="object-cover"
                 loading={index < 6 ? "eager" : "lazy"}
               />

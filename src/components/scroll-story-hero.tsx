@@ -2,7 +2,6 @@
 
 import { MockScreenshot, TabletMockup } from "@/components/device-mockups";
 import { TechStackRow } from "@/components/tech-icons";
-import { EASE_PEAR } from "@/lib/motion-pear";
 import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import { useRef, type MouseEvent } from "react";
 
@@ -20,7 +19,7 @@ function useHeroScrollTransforms(p: ReturnType<typeof useSpring>) {
   // Name moves out from center quickly.
   const nameScale = useTransform(p, [0.0, 0.1], [1.35, 1]);
   const nameY = useTransform(p, [0.0, 0.1], ["0vh", "-4vh"]);
-  const nameX = useTransform(p, [0.0, 0.1], ["0vw", "-22vw"]); 
+  const nameX = useTransform(p, [0.0, 0.1], ["0vw", "-16vw"]);
   const extrasY = useTransform(p, [0.03, 0.08], ["20px", "0px"]);
 
   // Intro stays visible the whole time
@@ -145,9 +144,9 @@ export function ScrollStoryHero({
       ref={scrollRootRef}
       id="hero"
       // Extensive scroll distance accommodates the 3-chapter scroll story.
-      className="relative h-[400vh]"
+      className="relative h-[360vh] sm:h-[390vh] lg:h-[400vh]"
     >
-      <div className="sticky top-0 flex flex-col h-[100dvh] w-full overflow-hidden items-center justify-center">
+      <div className="sticky top-0 flex h-[100svh] w-full flex-col items-center justify-center overflow-hidden md:h-[100dvh]">
         {/* Glow backgrounds */}
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 h-[min(100vw,520px)] w-[min(100vw,520px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/24 blur-[100px]"
@@ -161,7 +160,7 @@ export function ScrollStoryHero({
         <div className="relative z-10 w-full h-full max-w-[1800px] overflow-visible">
           
           {/* Intro Chapter: Main Name */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-[90vw] md:w-[40rem] flex flex-col pointer-events-none">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 z-30 flex w-[92vw] max-w-[40rem] -translate-x-1/2 -translate-y-1/2 flex-col px-2 sm:w-[90vw] sm:px-0 md:w-[40rem]">
              <motion.div
                className="w-full flex flex-col items-center pointer-events-auto"
                style={{ x: t.nameX, y: t.nameY, opacity: t.introOpacity }}
@@ -202,13 +201,13 @@ export function ScrollStoryHero({
 
                  {/* About Pop-up right under the subtitle */}
                  <motion.div
-                   className="w-[90vw] max-w-lg flex flex-col gap-6 items-center justify-center pointer-events-auto mt-4"
+                   className="mt-4 flex w-[90vw] max-w-lg flex-col items-center justify-center gap-6 px-2 pointer-events-auto sm:px-0"
                    style={{ opacity: t.aboutContainerOpacity, y: t.aboutY }}
                  >
                     <div className="w-full space-y-4 text-center">
                       <motion.div style={{ opacity: t.contentFadeOut }}>
-                        <p className="text-sm md:text-base leading-relaxed text-muted-foreground max-w-xl mx-auto">
-                          I&apos;m a freshman at Rutgers studying Computer Science and Data Science. I&apos;m interested in frontend engineering and AI/ML. Currently, I&apos;m the Director of Technology at Health Decoded, a nonprofit teaching health literacy to youth.
+                        <p className="mx-auto max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
+                          I&apos;m a student at Rutgers studying Computer Science and Data Science. I&apos;m interested in frontend engineering and AI/ML. Currently, I&apos;m the Director of Technology at Health Decoded, a nonprofit teaching health literacy to youth.
                         </p>
                         <div className="pt-4 flex flex-col items-center">
                           <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
@@ -223,14 +222,14 @@ export function ScrollStoryHero({
                         <button
                           type="button"
                           onClick={onViewWork}
-                          className="group relative cursor-pointer flex justify-center rounded-full bg-transparent border-none outline-none align-middle"
+                          className="group relative flex cursor-pointer justify-center rounded-full border-none bg-transparent align-middle outline-none"
                         >
                           <motion.div 
                             className="absolute inset-0 z-0 bg-brand rounded-full"
                             style={{ scale: t.bgZoom, transformOrigin: "center center" }}
                           />
-                          <motion.span 
-                            className="relative z-10 block px-6 py-2.5 md:px-8 md:py-3.5 text-sm font-medium text-brand-foreground"
+                          <motion.span
+                            className="relative z-10 block px-6 py-3 text-sm font-medium text-brand-foreground md:px-8 md:py-3.5"
                             style={{ opacity: t.contentFadeOut }}
                           >
                             View Work
@@ -245,7 +244,7 @@ export function ScrollStoryHero({
           </div>
 
           {/* Intro Chapter: Photo */}
-          <div className="pointer-events-none absolute right-[10%] top-1/2 -translate-y-1/2 z-20 w-[min(90vw,400px)] lg:w-[min(44vw,480px)]">
+          <div className="pointer-events-none absolute right-[8%] top-1/2 z-20 hidden w-[min(44vw,480px)] -translate-y-1/2 lg:block">
             <motion.div
               style={{
                 opacity: t.photoOpacity,

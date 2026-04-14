@@ -16,7 +16,7 @@ type TabletMockupProps = DeviceShellProps & {
 export function PhoneMockup({ children, className = "" }: DeviceShellProps) {
   return (
     <div
-      className={`relative mx-auto w-full max-w-[min(100%,320px)] ${className}`}
+      className={`relative mx-auto w-full max-w-[min(100%,300px)] sm:max-w-[min(100%,320px)] ${className}`}
     >
       <div className="rounded-[2.75rem] border border-white/10 bg-zinc-950/90 p-[10px] shadow-[0_28px_90px_-14px_rgba(0,0,0,0.6)] ring-1 ring-white/5">
         <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2.25rem] bg-black">
@@ -35,7 +35,7 @@ export function TabletMockup({
 }: TabletMockupProps) {
   return (
     <div
-      className={`relative mx-auto w-full max-w-[min(100%,calc(100vw-2rem))] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[min(100%,520px)] ${className}`}
+      className={`relative mx-auto w-full max-w-[min(100%,calc(100vw-1.5rem))] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[min(100%,520px)] ${className}`}
     >
       <div className="rounded-[2rem] border border-white/10 bg-zinc-900/95 p-2.5 shadow-[0_36px_110px_-20px_rgba(0,0,0,0.58)] ring-1 ring-white/5 sm:rounded-[2.15rem] sm:p-3">
         <div className="mb-2 flex justify-center sm:mb-2.5" aria-hidden>
@@ -45,7 +45,7 @@ export function TabletMockup({
           className={`relative ${screenAspectClass} overflow-hidden rounded-[1.35rem] bg-zinc-950 sm:rounded-[1.35rem]`}
         >
           {inset ? (
-            <div className="absolute inset-[11%] sm:inset-[13%] lg:inset-[14%]">
+            <div className="absolute inset-[10%] sm:inset-[12%] lg:inset-[14%]">
               <div className="relative h-full w-full">{children}</div>
             </div>
           ) : (

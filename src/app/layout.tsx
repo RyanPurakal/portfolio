@@ -17,7 +17,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Ryan Purakal — Frontend Engineer & Designer",
   description:
-    "Portfolio of Ryan Purakal — Rutgers freshman in CS & Data Science. Frontend, AI/ML, and Director of Technology at Health Decoded.",
+    "Portfolio of Ryan Purakal — Rutgers student in CS & Data Science. Frontend, AI/ML, and Director of Technology at Health Decoded.",
 };
 
 export default function RootLayout({

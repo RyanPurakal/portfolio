@@ -213,7 +213,7 @@ export function PortfolioContent() {
 
       <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-background/75 backdrop-blur-xl supports-[backdrop-filter]:bg-background/65">
         <nav
-          className="mx-auto flex max-w-[1800px] flex-wrap items-center justify-center gap-x-2 gap-y-2 px-6 py-4 md:justify-end md:gap-x-8 md:px-12 lg:px-16"
+          className="mx-auto flex max-w-[1800px] flex-wrap items-center justify-center gap-x-1 gap-y-1 px-4 py-2.5 md:justify-end md:gap-x-4 md:px-12 md:py-3 lg:gap-x-6 lg:px-16"
           aria-label="Page sections"
         >
           {NAV_SECTIONS.map(({ id, label }) => (
@@ -221,7 +221,7 @@ export function PortfolioContent() {
               key={id}
               href={`#${id}`}
               onClick={(e) => navClick(e, id)}
-              className={`text-sm transition-all duration-500 ease-out md:text-base ${activeSectionId === id
+              className={`inline-flex min-h-11 items-center rounded-full px-3 py-2 text-sm leading-none transition-all duration-500 ease-out md:min-h-0 md:px-2 md:py-1 md:text-base ${activeSectionId === id
                   ? "text-brand font-medium"
                   : "text-muted-foreground hover:text-foreground"
                 }`}
@@ -241,7 +241,7 @@ export function PortfolioContent() {
 
       <section
         id="work"
-        className="relative min-h-[88dvh] px-6 py-24 md:px-12 md:py-28 lg:px-16 lg:py-32"
+        className="relative min-h-[78svh] px-5 py-20 sm:px-6 md:min-h-[88dvh] md:px-12 md:py-28 lg:px-16 lg:py-32"
       >
         <div className="mx-auto w-full max-w-[1400px]">
           <motion.h2
@@ -363,7 +363,7 @@ export function PortfolioContent() {
 
       <section
         id="experience"
-        className="min-h-[min(140dvh,2000px)] border-t border-border/80 px-6 py-20 md:px-12 md:py-28 lg:px-16"
+        className="border-t border-border/80 px-5 py-16 sm:px-6 md:min-h-[110dvh] md:px-12 md:py-24 lg:px-16 lg:py-28"
       >
         <div className="mx-auto w-full max-w-[1400px]">
           <motion.h2
@@ -397,7 +397,7 @@ export function PortfolioContent() {
                 >
                   <button
                     type="button"
-                    className="flex w-full items-start justify-between gap-4 px-4 py-3 text-left md:items-center md:py-3.5"
+                    className="flex w-full items-start justify-between gap-4 px-4 py-3.5 text-left md:items-center md:py-3.5"
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     id={`exp-trigger-${exp.company}`}
@@ -452,7 +452,7 @@ export function PortfolioContent() {
 
       <section
         id="contact"
-        className="relative min-h-[88dvh] border-t border-border/80 px-6 py-24 md:px-12 md:py-32 lg:px-16"
+        className="relative min-h-[76svh] border-t border-border/80 px-5 py-20 sm:px-6 md:min-h-[88dvh] md:px-12 md:py-32 lg:px-16"
       >
         <div
           className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-muted/50 via-brand-muted/15 to-background"
@@ -473,7 +473,7 @@ export function PortfolioContent() {
             Let&apos;s build something together
           </motion.h2>
           <motion.p
-            className="text-muted-foreground mx-auto mb-8 max-w-lg text-lg"
+            className="text-muted-foreground mx-auto mb-8 max-w-lg px-2 text-base sm:text-lg"
             initial={{
               opacity: prefersReducedMotion ? 1 : 0,
               y: prefersReducedMotion ? 0 : 20,
@@ -487,7 +487,7 @@ export function PortfolioContent() {
           </motion.p>
           <motion.a
             href={`mailto:${EMAIL}`}
-            className="text-brand hover:text-brand/85 mb-10 inline-block text-xl font-medium underline-offset-4 transition-all duration-500 hover:underline"
+            className="text-brand hover:text-brand/85 mb-10 inline-block max-w-full break-all px-2 text-lg font-medium underline-offset-4 transition-all duration-500 hover:underline sm:text-xl"
             initial={{
               opacity: prefersReducedMotion ? 1 : 0,
               y: prefersReducedMotion ? 0 : 16,
@@ -502,7 +502,7 @@ export function PortfolioContent() {
             {EMAIL}
           </motion.a>
           <motion.div
-            className="flex justify-center gap-10"
+            className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4"
             initial={{
               opacity: prefersReducedMotion ? 1 : 0,
               y: prefersReducedMotion ? 0 : 16,
@@ -513,7 +513,7 @@ export function PortfolioContent() {
           >
             <a
               href="https://github.com/RyanPurakal"
-              className="text-muted-foreground hover:text-brand inline-flex items-center gap-2 transition-all duration-500"
+              className="text-muted-foreground hover:text-brand inline-flex min-h-11 items-center gap-2 rounded-md px-2 py-1 transition-all duration-500"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -522,7 +522,7 @@ export function PortfolioContent() {
             </a>
             <a
               href="https://www.linkedin.com/in/ryan-purakal"
-              className="text-muted-foreground hover:text-brand inline-flex items-center gap-2 transition-all duration-500"
+              className="text-muted-foreground hover:text-brand inline-flex min-h-11 items-center gap-2 rounded-md px-2 py-1 transition-all duration-500"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -533,7 +533,7 @@ export function PortfolioContent() {
         </div>
       </section>
 
-      <footer className="border-t border-border px-6 py-10 md:px-12 lg:px-16">
+      <footer className="border-t border-border px-5 py-10 sm:px-6 md:px-12 lg:px-16">
         <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-6 sm:flex-row">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Ryan Purakal. All rights reserved.
@@ -541,7 +541,7 @@ export function PortfolioContent() {
           <div className="flex gap-6">
             <a
               href="https://github.com/RyanPurakal"
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              className="text-muted-foreground inline-flex min-h-11 min-w-11 items-center justify-center transition-colors hover:text-foreground"
               aria-label="GitHub"
               target="_blank"
               rel="noopener noreferrer"
@@ -550,7 +550,7 @@ export function PortfolioContent() {
             </a>
             <a
               href="https://www.linkedin.com/in/ryan-purakal"
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              className="text-muted-foreground inline-flex min-h-11 min-w-11 items-center justify-center transition-colors hover:text-foreground"
               aria-label="LinkedIn"
               target="_blank"
               rel="noopener noreferrer"
@@ -559,7 +559,7 @@ export function PortfolioContent() {
             </a>
             <a
               href={`mailto:${EMAIL}`}
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              className="text-muted-foreground inline-flex min-h-11 min-w-11 items-center justify-center transition-colors hover:text-foreground"
               aria-label="Email"
             >
               <IconMail />
