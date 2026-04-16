@@ -3,7 +3,7 @@
 import { MockScreenshot, TabletMockup } from "@/components/device-mockups";
 import { TechStackRow } from "@/components/tech-icons";
 import { motion, useScroll, useTransform, useSpring } from "motion/react";
-import { useRef, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 
 const HERO_NAME = ["Ryan", "Purakal"] as const;
 const HERO_SUBTITLE = ["Frontend", "Engineer", "&", "Designer"] as const;
@@ -61,6 +61,16 @@ export function ScrollStoryHero({
   prefersReducedMotion,
   onViewWork,
 }: ScrollStoryHeroProps) {
+  const [useStaticHero, setUseStaticHero] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1023px)");
+    const apply = () => setUseStaticHero(mediaQuery.matches);
+    apply();
+    mediaQuery.addEventListener("change", apply);
+    return () => mediaQuery.removeEventListener("change", apply);
+  }, []);
+
   const scrollRootRef = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: scrollRootRef,
@@ -78,7 +88,7 @@ export function ScrollStoryHero({
   // Use state to track zoom so we can mount/dismount or control styles strictly?
   // Let's rely entirely on motion/react for performance.
 
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion || useStaticHero) {
     return (
       <section
         id="hero"
