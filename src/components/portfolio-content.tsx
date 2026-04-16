@@ -213,7 +213,7 @@ export function PortfolioContent() {
 
       <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-background/75 backdrop-blur-xl supports-[backdrop-filter]:bg-background/65">
         <nav
-          className="mx-auto flex max-w-[1800px] flex-wrap items-center justify-center gap-x-1 gap-y-1 px-4 py-2.5 md:justify-end md:gap-x-4 md:px-12 md:py-3 lg:gap-x-6 lg:px-16"
+          className="mx-auto flex w-full max-w-[1800px] flex-nowrap items-center justify-start gap-x-1 overflow-x-auto px-2 py-2.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:justify-end md:gap-x-4 md:overflow-visible md:px-12 md:py-3 lg:gap-x-6 lg:px-16"
           aria-label="Page sections"
         >
           {NAV_SECTIONS.map(({ id, label }) => (
@@ -221,7 +221,7 @@ export function PortfolioContent() {
               key={id}
               href={`#${id}`}
               onClick={(e) => navClick(e, id)}
-              className={`inline-flex min-h-11 items-center rounded-full px-3 py-2 text-sm leading-none transition-all duration-500 ease-out md:min-h-0 md:px-2 md:py-1 md:text-base ${activeSectionId === id
+              className={`inline-flex min-h-11 shrink-0 items-center rounded-full px-3 py-2 text-sm leading-none transition-all duration-500 ease-out md:min-h-0 md:px-2 md:py-1 md:text-base ${activeSectionId === id
                   ? "text-brand font-medium"
                   : "text-muted-foreground hover:text-foreground"
                 }`}

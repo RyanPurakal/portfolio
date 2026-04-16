@@ -61,11 +61,15 @@ export function ScrollStoryHero({
   prefersReducedMotion,
   onViewWork,
 }: ScrollStoryHeroProps) {
-  const [useStaticHero, setUseStaticHero] = useState(false);
+  const [enableScrollStoryHero, setEnableScrollStoryHero] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 1023px)");
-    const apply = () => setUseStaticHero(mediaQuery.matches);
+    // Workaround: run the heavy scroll-story only on large, pointer-first desktops.
+    // This avoids mobile viewport quirks and sticky/transform clipping.
+    const mediaQuery = window.matchMedia(
+      "(min-width: 1280px) and (hover: hover) and (pointer: fine)",
+    );
+    const apply = () => setEnableScrollStoryHero(mediaQuery.matches);
     apply();
     mediaQuery.addEventListener("change", apply);
     return () => mediaQuery.removeEventListener("change", apply);
@@ -88,7 +92,7 @@ export function ScrollStoryHero({
   // Use state to track zoom so we can mount/dismount or control styles strictly?
   // Let's rely entirely on motion/react for performance.
 
-  if (prefersReducedMotion || useStaticHero) {
+  if (prefersReducedMotion || !enableScrollStoryHero) {
     return (
       <section
         id="hero"
