@@ -2,6 +2,8 @@
 
 import { MockScreenshot, TabletMockup } from "@/components/device-mockups";
 import { TechStackRow } from "@/components/tech-icons";
+import { HeroTitle } from "@/components/ui/hero-title";
+import { AmbientSpace } from "@/components/ui/ambient-space";
 import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 
@@ -95,22 +97,19 @@ export function ScrollStoryHero({
   if (prefersReducedMotion || !enableScrollStoryHero) {
     return (
       <section
+        ref={scrollRootRef}
         id="hero"
         className="relative flex h-auto flex-col overflow-hidden px-6 pt-24 pb-12 md:px-12 lg:px-16"
       >
+        <AmbientSpace />
         <div className="mx-auto grid min-h-0 w-full max-w-[1800px] flex-1 content-center items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="order-2 lg:order-1">
             <div className="mb-8 w-full max-w-xl">
-              <h1
-                className="mb-6 flex flex-wrap gap-x-[0.2em] gap-y-1 font-serif text-5xl font-normal tracking-tight text-foreground sm:text-6xl md:text-7xl"
-                style={{ fontFamily: "var(--font-serif)" }}
-              >
-                {HERO_NAME.map((word) => (
-                  <span key={word} className="inline-block">
-                    {word}
-                  </span>
-                ))}
-              </h1>
+              <HeroTitle 
+                text={[...HERO_NAME]} 
+                prefersReducedMotion={prefersReducedMotion} 
+                className="justify-start text-foreground" 
+              />
               <div className="mb-6 h-px max-w-xs origin-left bg-border" />
               <p
                 className="text-muted-foreground mb-8 flex flex-wrap gap-x-[0.35em] gap-y-1 text-lg sm:text-xl"
@@ -161,6 +160,7 @@ export function ScrollStoryHero({
       className="relative h-[360vh] sm:h-[390vh] lg:h-[400vh]"
     >
       <div className="sticky top-0 flex h-[100svh] w-full flex-col items-center justify-center overflow-hidden md:h-[100dvh]">
+        <AmbientSpace />
         {/* Glow backgrounds */}
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 h-[min(100vw,520px)] w-[min(100vw,520px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/24 blur-[100px]"
@@ -179,20 +179,19 @@ export function ScrollStoryHero({
                className="w-full flex flex-col items-center pointer-events-auto"
                style={{ x: t.nameX, y: t.nameY, opacity: t.introOpacity }}
              >
-              <motion.h1
-                className="mb-[1.5rem] flex flex-wrap justify-center gap-x-[0.2em] gap-y-1 font-serif text-5xl font-normal tracking-tight text-foreground sm:text-6xl md:text-7xl"
+              <motion.div
                 style={{
-                  fontFamily: "var(--font-serif)",
                   scale: t.nameScale,
                   transformOrigin: "center top",
                 }}
+                className="z-50"
               >
-                {HERO_NAME.map((word) => (
-                  <span key={word} className="inline-block">
-                    {word}
-                  </span>
-                ))}
-              </motion.h1>
+                <HeroTitle 
+                  text={[...HERO_NAME]} 
+                  prefersReducedMotion={prefersReducedMotion} 
+                  className="justify-center text-foreground" 
+                />
+              </motion.div>
 
               {/* Subtitle */}
               <motion.div
