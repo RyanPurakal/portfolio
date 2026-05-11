@@ -1,17 +1,13 @@
 "use client";
 
 import {
-  BrowserMockup,
-  MockScreenshot,
-  PhoneMockup,
-} from "@/components/device-mockups";
-import {
   HEADER_SCROLL_OFFSET,
   useLenisScroll,
 } from "@/components/lenis-provider";
 import { ScrollStoryHero } from "@/components/scroll-story-hero";
+import { Header, type HeaderNavLink } from "@/components/ui/header-2";
 import { ImageAutoSlider } from "@/components/ui/image-auto-slider";
-import { experience } from "@/data/portfolio";
+import { experience, projects } from "@/data/portfolio";
 import { EASE_PEAR, springSoft, viewportPear } from "@/lib/motion-pear";
 import { motion, useReducedMotion } from "motion/react";
 import {
@@ -106,35 +102,24 @@ export function PortfolioContent() {
 
   const [activeSectionId, setActiveSectionId] = useState<string>("hero");
   const [openExperienceId, setOpenExperienceId] = useState<string | null>(null);
-  const [githubRepos, setGithubRepos] = useState<any[]>([]);
-  const [loadingRepos, setLoadingRepos] = useState(true);
-
-  useEffect(() => {
-    fetch("https://api.github.com/users/RyanPurakal/repos?sort=updated&per_page=100")
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) {
-          setGithubRepos(data.filter(repo => !repo.fork));
-        }
-        setLoadingRepos(false);
-      })
-      .catch(err => {
-        console.error("Failed to fetch GitHub repos:", err);
-        setLoadingRepos(false);
-      });
-  }, []);
-
-  const navClick = useCallback(
-    (e: MouseEvent<HTMLAnchorElement>, id: string) => {
-      e.preventDefault();
-      scrollToId(id);
-    },
-    [scrollToId],
-  );
 
   const sectionIds = useMemo(
     () => NAV_SECTIONS.map((s) => s.id) as string[],
     [],
+  );
+
+  const headerLinks = useMemo<HeaderNavLink[]>(
+    () => NAV_SECTIONS.map((s) => ({ label: s.label, href: `#${s.id}` })),
+    [],
+  );
+
+  const handleHeaderNavigate = useCallback(
+    (e: MouseEvent<HTMLAnchorElement>, link: HeaderNavLink) => {
+      e.preventDefault();
+      const id = link.href.startsWith("#") ? link.href.slice(1) : link.href;
+      if (id) scrollToId(id);
+    },
+    [scrollToId],
   );
 
   useEffect(() => {
@@ -183,7 +168,7 @@ export function PortfolioContent() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-clip bg-background text-foreground">
+    <div className="relative min-h-screen overflow-x-clip bg-[var(--bg)] text-foreground">
       {!prefersReducedMotion ? (
         <div
           className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
@@ -227,27 +212,25 @@ export function PortfolioContent() {
         </div>
       ) : null}
 
-      <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-background/75 backdrop-blur-xl supports-[backdrop-filter]:bg-background/65">
-        <nav
-          className="mx-auto flex w-full max-w-[1800px] flex-nowrap items-center justify-start gap-x-1 overflow-x-auto px-2 py-2.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:justify-end md:gap-x-4 md:overflow-visible md:px-12 md:py-3 lg:gap-x-6 lg:px-16"
-          aria-label="Page sections"
-        >
-          {NAV_SECTIONS.map(({ id, label }) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              onClick={(e) => navClick(e, id)}
-              className={`inline-flex min-h-11 shrink-0 items-center rounded-full px-3 py-2 text-sm leading-none transition-all duration-500 ease-out md:min-h-0 md:px-2 md:py-1 md:text-base ${activeSectionId === id
-                  ? "text-brand font-medium"
-                  : "text-muted-foreground hover:text-foreground"
-                }`}
-              aria-current={activeSectionId === id ? "true" : undefined}
-            >
-              {label}
-            </a>
-          ))}
-        </nav>
-      </header>
+      <Header
+        layout="wide"
+        links={headerLinks}
+        activeHref={`#${activeSectionId}`}
+        onNavigate={handleHeaderNavigate}
+        showAuthButtons={false}
+        wordmark={
+          <a
+            href="#hero"
+            className="font-serif text-sm font-semibold tracking-tight text-foreground transition-colors hover:text-brand md:text-base"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToId("hero");
+            }}
+          >
+            Ryan Purakal
+          </a>
+        }
+      />
 
       <ScrollStoryHero
         heroImage={HERO_IMAGE}
@@ -255,285 +238,227 @@ export function PortfolioContent() {
         onViewWork={viewWorkClick}
       />
 
-      <section
-        id="work"
-        className="relative min-h-[78svh] px-5 py-20 sm:px-6 md:min-h-[88dvh] md:px-12 md:py-28 lg:px-16 lg:py-32"
-      >
-        <div className="mx-auto w-full max-w-[1400px]">
-          <motion.h2
-            className="mb-14 font-serif text-4xl font-normal tracking-tight text-foreground sm:text-5xl md:text-6xl"
-            style={{ fontFamily: "var(--font-serif)" }}
-            initial={{
-              opacity: prefersReducedMotion ? 1 : 0,
-              y: prefersReducedMotion ? 0 : 20,
-            }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportPear}
-            transition={inViewTransition(0)}
-          >
-            Selected Work
-          </motion.h2>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {loadingRepos ? (
-              <p className="text-muted-foreground col-span-full text-center py-12">Loading projects from GitHub...</p>
-            ) : (
-              githubRepos.map((repo, index) => {
-                const className =
-                  "group block rounded-3xl border border-border/80 bg-card/25 p-6 shadow-md shadow-black/20 transition-[border-color,box-shadow] duration-500 ease-out hover:border-brand/35 hover:shadow-2xl hover:shadow-black/30 flex flex-col h-full";
 
-                return (
-                  <motion.a
-                    key={repo.id}
-                    href={repo.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{
-                      opacity: prefersReducedMotion ? 1 : 0,
-                      y: prefersReducedMotion ? 0 : 20,
-                    }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={viewportPear}
-                    transition={inViewTransition(index * 0.1)}
-                    whileHover={
-                      prefersReducedMotion
-                        ? undefined
-                        : { y: -10, transition: springSoft }
-                    }
-                    className={className}
-                  >
-                    <div className="flex items-start justify-between mb-4">
-                      <h3 className="text-xl font-semibold text-foreground group-hover:text-brand transition-colors">{repo.name}</h3>
-                      <IconGithub className="size-6 text-muted-foreground group-hover:text-brand transition-colors shrink-0 ml-4" />
-                    </div>
-                    <p className="mb-6 text-sm leading-relaxed text-muted-foreground flex-grow">
-                      {repo.description || "No description provided."}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mt-auto">
-                      {repo.language && (
-                        <span className="rounded-md border border-border bg-secondary/40 px-2.5 py-0.5 text-xs text-muted-foreground">
-                          {repo.language}
-                        </span>
-                      )}
-                      <span className="rounded-md border border-border bg-secondary/40 px-2.5 py-0.5 text-xs text-muted-foreground flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        {repo.stargazers_count}
-                      </span>
-                    </div>
-                  </motion.a>
-                );
-              })
-            )}
-          </div>
-        </div>
-      </section>
+      <div className="editorial-design">
+        <TealFlood />
 
-      <section
-        id="experience"
-        className="border-t border-border/80 px-5 py-16 sm:px-6 md:min-h-[110dvh] md:px-12 md:py-24 lg:px-16 lg:py-28"
-      >
-        <div className="mx-auto w-full max-w-[1400px]">
-          <motion.h2
-            className="mb-12 font-serif text-4xl font-normal tracking-tight text-foreground sm:text-5xl md:text-6xl"
-            style={{ fontFamily: "var(--font-serif)" }}
-            initial={{
-              opacity: prefersReducedMotion ? 1 : 0,
-              y: prefersReducedMotion ? 0 : 20,
-            }}
+        <section id="work">
+          <motion.p 
+            className="section-label"
+            initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportPear}
-            transition={inViewTransition(0)}
-          >
-            Experience
-          </motion.h2>
-          <ul className="mb-0 flex flex-col gap-3" role="list">
-            {experience.map((exp, index) => {
-              const isOpen = openExperienceId === exp.company;
-              const panelId = `exp-panel-${exp.company}`;
-              return (
-                <motion.li
-                  key={exp.company}
-                  className="rounded-2xl border border-border/90 border-l-4 border-l-brand/45 bg-secondary/15 shadow-sm shadow-black/10 transition-colors duration-500 hover:border-brand/35"
-                  initial={{
-                    opacity: prefersReducedMotion ? 1 : 0,
-                    y: prefersReducedMotion ? 0 : 20,
-                  }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={viewportPear}
-                  transition={inViewTransition(index * 0.1)}
-                >
-                  <button
-                    type="button"
-                    className="flex w-full items-start justify-between gap-4 px-4 py-3.5 text-left md:items-center md:py-3.5"
-                    aria-expanded={isOpen}
-                    aria-controls={panelId}
-                    id={`exp-trigger-${exp.company}`}
-                    onClick={() =>
-                      setOpenExperienceId(isOpen ? null : exp.company)
-                    }
-                  >
-                    <div>
-                      <h3
-                        id={`exp-title-${exp.company}`}
-                        className="text-base font-semibold text-foreground"
-                      >
-                        {exp.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {exp.company}
-                      </p>
-                    </div>
-                    <span
-                      className="text-muted-foreground shrink-0 text-sm tabular-nums"
-                      aria-hidden
-                    >
-                      {exp.period}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "0px 0px -36px 0px" }}
+          >Projects</motion.p>
+          <motion.h2 
+            className="section-title"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: 0.09 }}
+            viewport={{ once: true, margin: "0px 0px -36px 0px" }}
+          >Selected <em>work</em></motion.h2>
+
+          <div className="work-grid">
+            {projects.map((project, index) => (
+              <motion.a
+                key={project.title}
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`project-card ${index % 3 === 0 ? "wide" : ""}`}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.75,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: (index % 3) * 0.09,
+                }}
+                viewport={{ once: true, margin: "0px 0px -36px 0px" }}
+              >
+                <span className="project-number">
+                  {(index + 1).toString().padStart(2, "0")}
+                </span>
+                <h3 className="project-name">{project.title}</h3>
+                <p className="project-desc">{project.description}</p>
+                <div className="project-tags">
+                  {project.tech.map((tag) => (
+                    <span key={tag} className="tag">
+                      {tag}
                     </span>
-                  </button>
-                  {isOpen && (
-                    <div
-                      id={panelId}
-                      role="region"
-                      aria-labelledby={`exp-title-${exp.company}`}
-                      className="border-t border-border/60 px-4 pb-3 pt-1"
+                  ))}
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </section>
+
+        <section id="experience">
+          <motion.p 
+            className="section-label"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "0px 0px -36px 0px" }}
+          >Experience</motion.p>
+          <motion.h2 
+            className="section-title"
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: 0.09 }}
+            viewport={{ once: true, margin: "0px 0px -36px 0px" }}
+          ><em>Where</em> I've worked</motion.h2>
+
+          <div className="experience-list">
+            {experience.map((exp, index) => (
+              <motion.div 
+                key={exp.company} 
+                className="exp-item"
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: (index % 5) * 0.09 }}
+                viewport={{ once: true, margin: "0px 0px -36px 0px" }}
+              >
+                <div className="exp-bar" aria-hidden />
+                <div className="exp-body">
+                  <h3 className="exp-role">{exp.title}</h3>
+                  {exp.companyUrl ? (
+                    <a
+                      href={exp.companyUrl}
+                      className="exp-org exp-org-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted-foreground">
-                        {exp.bullets.map((b) => (
-                          <li key={b}>{b}</li>
-                        ))}
-                      </ul>
-                    </div>
+                      {exp.company}
+                      <span className="exp-org-arrow" aria-hidden>
+                        {" "}
+                        ↗
+                      </span>
+                    </a>
+                  ) : (
+                    <p className="exp-org">{exp.company}</p>
                   )}
-                </motion.li>
-              );
-            })}
-          </ul>
+                  <p className="exp-period-sm">{exp.period}</p>
+                  <ul className="exp-bullets">
+                    {exp.bullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="exp-date">{exp.period}</div>
+              </motion.div>
+            ))}
+          </div>
 
           <ImageAutoSlider
-            className="mt-8 md:mt-10"
+            className="mt-16 md:mt-24"
             prefersReducedMotion={prefersReducedMotion}
             duration={38}
           />
-        </div>
-      </section>
+        </section>
 
+        <section id="contact">
+          <div className="contact-inner">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, margin: "0px 0px -36px 0px" }}
+            >
+              <p className="section-label">Contact</p>
+              <h2 className="contact-headline">Open to<br/>opportunities<em>.</em></h2>
+              <p className="contact-body">I'm looking for internships in software engineering and AI/ML for Summer/Fall 2026. If you're building something interesting, reach out.</p>
+            </motion.div>
 
-      <section
-        id="contact"
-        className="relative min-h-[76svh] border-t border-border/80 px-5 py-20 sm:px-6 md:min-h-[88dvh] md:px-12 md:py-32 lg:px-16"
-      >
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-muted/50 via-brand-muted/15 to-background"
-          aria-hidden
-        />
-        <div className="relative mx-auto max-w-[1400px] text-center">
-          <motion.h2
-            className="mb-6 font-serif text-4xl font-normal tracking-tight text-foreground sm:text-5xl md:text-6xl"
-            style={{ fontFamily: "var(--font-serif)" }}
-            initial={{
-              opacity: prefersReducedMotion ? 1 : 0,
-              y: prefersReducedMotion ? 0 : 20,
-            }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportPear}
-            transition={inViewTransition(0)}
-          >
-            Let&apos;s build something together
-          </motion.h2>
-          <motion.p
-            className="text-muted-foreground mx-auto mb-8 max-w-lg px-2 text-base sm:text-lg"
-            initial={{
-              opacity: prefersReducedMotion ? 1 : 0,
-              y: prefersReducedMotion ? 0 : 20,
-            }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportPear}
-            transition={inViewTransition(0.1)}
-          >
-            Reach out for collaborations, internships, or just to talk product
-            and frontend craft.
-          </motion.p>
-          <motion.a
-            href={`mailto:${EMAIL}`}
-            className="text-brand hover:text-brand/85 mb-10 inline-block max-w-full break-all px-2 text-lg font-medium underline-offset-4 transition-all duration-500 hover:underline sm:text-xl"
-            initial={{
-              opacity: prefersReducedMotion ? 1 : 0,
-              y: prefersReducedMotion ? 0 : 16,
-            }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportPear}
-            transition={inViewTransition(0.2)}
-            whileHover={
-              prefersReducedMotion ? undefined : { scale: 1.02, transition: springSoft }
-            }
-          >
-            {EMAIL}
-          </motion.a>
-          <motion.div
-            className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4"
-            initial={{
-              opacity: prefersReducedMotion ? 1 : 0,
-              y: prefersReducedMotion ? 0 : 16,
-            }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportPear}
-            transition={inViewTransition(0.3)}
-          >
-            <a
-              href="https://github.com/RyanPurakal"
-              className="text-muted-foreground hover:text-brand inline-flex min-h-11 items-center gap-2 rounded-md px-2 py-1 transition-all duration-500"
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.div 
+              className="contact-links"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: 0.09 }}
+              viewport={{ once: true, margin: "0px 0px -36px 0px" }}
             >
-              <IconGithub className="size-6" />
-              <span>GitHub</span>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/ryan-purakal"
-              className="text-muted-foreground hover:text-brand inline-flex min-h-11 items-center gap-2 rounded-md px-2 py-1 transition-all duration-500"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <IconLinkedin className="size-6" />
-              <span>LinkedIn</span>
-            </a>
-          </motion.div>
-        </div>
-      </section>
-
-      <footer className="border-t border-border px-5 py-10 sm:px-6 md:px-12 lg:px-16">
-        <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-6 sm:flex-row">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Ryan Purakal. All rights reserved.
-          </p>
-          <div className="flex gap-6">
-            <a
-              href="https://github.com/RyanPurakal"
-              className="text-muted-foreground inline-flex min-h-11 min-w-11 items-center justify-center transition-colors hover:text-foreground"
-              aria-label="GitHub"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <IconGithub />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/ryan-purakal"
-              className="text-muted-foreground inline-flex min-h-11 min-w-11 items-center justify-center transition-colors hover:text-foreground"
-              aria-label="LinkedIn"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <IconLinkedin />
-            </a>
-            <a
-              href={`mailto:${EMAIL}`}
-              className="text-muted-foreground inline-flex min-h-11 min-w-11 items-center justify-center transition-colors hover:text-foreground"
-              aria-label="Email"
-            >
-              <IconMail />
-            </a>
+              <a className="contact-link-item" href={`mailto:${EMAIL}`}>
+                <span className="contact-link-type">Email</span>
+                <span className="contact-link-label">{EMAIL}</span>
+                <span className="contact-link-arrow">→</span>
+              </a>
+              <a className="contact-link-item" href="https://github.com/RyanPurakal" target="_blank" rel="noopener noreferrer">
+                <span className="contact-link-type">GitHub</span>
+                <span className="contact-link-label">github.com/RyanPurakal</span>
+                <span className="contact-link-arrow">→</span>
+              </a>
+              <a className="contact-link-item" href="https://linkedin.com/in/ryan-purakal" target="_blank" rel="noopener noreferrer">
+                <span className="contact-link-type">LinkedIn</span>
+                <span className="contact-link-label">linkedin.com/in/ryan-purakal</span>
+                <span className="contact-link-arrow">→</span>
+              </a>
+            </motion.div>
           </div>
-        </div>
-      </footer>
+        </section>
+
+        <footer>
+          <span className="footer-left">Ryan Purakal</span>
+          <span className="footer-right">© {new Date().getFullYear()}</span>
+        </footer>
+      </div>
+    </div>
+  );
+}
+
+
+function TealFlood() {
+  useEffect(() => {
+    const zone = document.getElementById('flood-zone');
+    const fill = document.getElementById('flood-fill');
+    if (!zone || !fill) return;
+
+    function ease(t: number) {
+      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
+    function lerp(a: number, b: number, t: number) {
+      return a + (b - a) * t;
+    }
+    function clamp(v: number, lo: number, hi: number) {
+      return Math.max(lo, Math.min(hi, v));
+    }
+
+    function update() {
+      if (!zone || !fill) return;
+      const rect = zone.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const total = rect.height + vh;
+      const scrolled = vh - rect.top;
+      const progress = clamp(scrolled / total, 0, 1);
+
+      if (progress <= 0 || progress >= 1) {
+        fill.style.clipPath = 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)';
+        zone.classList.remove('flood-peak');
+        return;
+      }
+
+      if (progress < 0.5) {
+        const p = ease(progress / 0.5);
+        const top = lerp(100, 0, p);
+        fill.style.clipPath = `polygon(0 ${top}%, 100% ${top}%, 100% 100%, 0 100%)`;
+        zone.classList.toggle('flood-peak', p > 0.85);
+      } else {
+        const p = ease((progress - 0.5) / 0.5);
+        const bottom = lerp(100, 0, p);
+        fill.style.clipPath = `polygon(0 0, 100% 0, 100% ${bottom}%, 0 ${bottom}%)`;
+        zone.classList.toggle('flood-peak', p < 0.15);
+      }
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+
+  return (
+    <div id="flood-zone">
+      <div id="flood-fill"></div>
+      <div className="flood-text">
+        <span>Selected Work</span>
+      </div>
     </div>
   );
 }

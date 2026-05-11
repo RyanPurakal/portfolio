@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
-import { DM_Serif_Display, Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { LenisProvider } from "@/components/lenis-provider";
 import "./globals.css";
 
-const dmSerifDisplay = DM_Serif_Display({
-  weight: "400",
+/** Same display serif as `.editorial-design` (globals) — one stack site-wide. */
+const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-serif",
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
 const inter = Inter({
@@ -28,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSerifDisplay.variable} ${inter.variable} dark h-full antialiased`}
+      className={`${playfair.variable} ${inter.variable} dark h-full antialiased`}
     >
       <body className="min-h-full">
         <LenisProvider>{children}</LenisProvider>

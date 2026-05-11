@@ -141,6 +141,7 @@
 
   html {
     font-size: var(--font-size);
+    background-color: var(--background);
   }
 
   h1 {
