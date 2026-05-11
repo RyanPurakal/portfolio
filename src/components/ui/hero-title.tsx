@@ -12,20 +12,18 @@ type CipherLetterProps = {
 };
 
 function CipherLetter({ char, index, prefersReducedMotion }: CipherLetterProps) {
-  const [current, setCurrent] = useState(
-    prefersReducedMotion || char === " " 
-      ? char 
-      : CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)]
-  );
+  // Same initial output on server and client (hydration-safe); scramble runs in useEffect.
+  const [current, setCurrent] = useState(char);
 
   useEffect(() => {
     if (prefersReducedMotion || char === " ") {
       setCurrent(char);
       return;
     }
-    
-    // total time to decode depends on index
-    const decodeTime = 800 + index * 90; // 800ms to ~2000ms
+
+    setCurrent(CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)]);
+
+    const decodeTime = 800 + index * 90;
     const interval = setInterval(() => {
       setCurrent(CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)]);
     }, 40);
@@ -45,8 +43,7 @@ function CipherLetter({ char, index, prefersReducedMotion }: CipherLetterProps) 
     return <span>&nbsp;</span>;
   }
 
-  // Randomize hover effects slightly per letter for organic feel
-  const rotateDeg = (Math.random() - 0.5) * 20;
+  const rotateDeg = ((index * 13) % 21) - 10;
 
   return (
     <motion.span

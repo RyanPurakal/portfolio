@@ -159,7 +159,7 @@ export function ScrollStoryHero({
       // Extensive scroll distance accommodates the 3-chapter scroll story.
       className="relative h-[360vh] sm:h-[390vh] lg:h-[400vh]"
     >
-      <div className="sticky top-0 flex h-[100svh] w-full flex-col items-center justify-center overflow-hidden md:h-[100dvh]">
+      <div className="sticky top-0 relative flex h-[100svh] w-full flex-col items-center justify-center overflow-hidden md:h-[100dvh]">
         <AmbientSpace />
         {/* Glow backgrounds */}
         <div
@@ -183,6 +183,7 @@ export function ScrollStoryHero({
                 style={{
                   scale: t.nameScale,
                   transformOrigin: "center top",
+                  opacity: t.contentFadeOut,
                 }}
                 className="z-50"
               >
@@ -198,7 +199,7 @@ export function ScrollStoryHero({
                 className="w-full flex flex-col items-center"
                 style={{ y: t.extrasY }}
               >
-                 <div className="w-full max-w-sm">
+                 <motion.div className="w-full max-w-sm" style={{ opacity: t.contentFadeOut }}>
                    <div className="mx-auto mb-6 h-px max-w-xs origin-center bg-border" />
                    <p
                      className="text-muted-foreground mb-8 flex flex-wrap justify-center gap-x-[0.35em] gap-y-1 text-lg sm:text-xl"
@@ -210,7 +211,7 @@ export function ScrollStoryHero({
                        </span>
                      ))}
                    </p>
-                 </div>
+                 </motion.div>
 
                  {/* About Pop-up right under the subtitle */}
                  <motion.div
@@ -267,7 +268,7 @@ export function ScrollStoryHero({
                 transformOrigin: "center right"
               }}
             >
-              <div className="pointer-events-auto">
+              <motion.div className="pointer-events-auto" style={{ opacity: t.contentFadeOut }}>
                 <TabletMockup screenAspectClass="aspect-[768/1024]" inset={false}>
                   <MockScreenshot
                     src={heroImage}
@@ -277,7 +278,7 @@ export function ScrollStoryHero({
                     imgClassName="object-cover object-center brightness-[1.07] contrast-[1.02]"
                   />
                 </TabletMockup>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>

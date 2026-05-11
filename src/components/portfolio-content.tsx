@@ -11,7 +11,7 @@ import {
 } from "@/components/lenis-provider";
 import { ScrollStoryHero } from "@/components/scroll-story-hero";
 import { ImageAutoSlider } from "@/components/ui/image-auto-slider";
-import { experience, projects } from "@/data/portfolio";
+import { experience } from "@/data/portfolio";
 import { EASE_PEAR, springSoft, viewportPear } from "@/lib/motion-pear";
 import { motion, useReducedMotion } from "motion/react";
 import {
@@ -106,6 +106,23 @@ export function PortfolioContent() {
 
   const [activeSectionId, setActiveSectionId] = useState<string>("hero");
   const [openExperienceId, setOpenExperienceId] = useState<string | null>(null);
+  const [githubRepos, setGithubRepos] = useState<any[]>([]);
+  const [loadingRepos, setLoadingRepos] = useState(true);
+
+  useEffect(() => {
+    fetch("https://api.github.com/users/RyanPurakal/repos?sort=updated&per_page=100")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setGithubRepos(data.filter(repo => !repo.fork));
+        }
+        setLoadingRepos(false);
+      })
+      .catch(err => {
+        console.error("Failed to fetch GitHub repos:", err);
+        setLoadingRepos(false);
+      });
+  }, []);
 
   const navClick = useCallback(
     (e: MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -257,63 +274,17 @@ export function PortfolioContent() {
             Selected Work
           </motion.h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project, index) => {
-              const mockup =
-                project.frame === "phone" ? (
-                  <PhoneMockup className="max-w-[240px]">
-                    <MockScreenshot
-                      src={project.screenshot}
-                      alt={`${project.title} screenshot`}
-                      sizes="(max-width: 768px) 100vw, 240px"
-                    />
-                  </PhoneMockup>
-                ) : (
-                  <BrowserMockup urlBar={project.title}>
-                    <MockScreenshot
-                      src={project.screenshot}
-                      alt={`${project.title} screenshot`}
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  </BrowserMockup>
-                );
+            {loadingRepos ? (
+              <p className="text-muted-foreground col-span-full text-center py-12">Loading projects from GitHub...</p>
+            ) : (
+              githubRepos.map((repo, index) => {
+                const className =
+                  "group block rounded-3xl border border-border/80 bg-card/25 p-6 shadow-md shadow-black/20 transition-[border-color,box-shadow] duration-500 ease-out hover:border-brand/35 hover:shadow-2xl hover:shadow-black/30 flex flex-col h-full";
 
-              const cardBody = (
-                <>
-                  <div className="relative mb-5 overflow-hidden rounded-2xl">
-                    {mockup}
-                    {project.href ? (
-                      <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl bg-black/55 opacity-0 transition-opacity duration-500 ease-out group-hover:pointer-events-auto group-hover:opacity-100 motion-reduce:opacity-0 motion-reduce:group-hover:opacity-0">
-                        <span className="font-medium text-white">
-                          View Project →
-                        </span>
-                      </div>
-                    ) : null}
-                  </div>
-                  <h3 className="mb-2 text-base font-semibold">{project.title}</h3>
-                  <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md border border-border bg-secondary/40 px-2.5 py-0.5 text-xs text-muted-foreground"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </>
-              );
-
-              const className =
-                "group block rounded-3xl border border-border/80 bg-card/25 p-5 shadow-md shadow-black/20 transition-[border-color,box-shadow] duration-500 ease-out hover:border-brand/35 hover:shadow-2xl hover:shadow-black/30";
-
-              if (project.href) {
                 return (
                   <motion.a
-                    key={project.title}
-                    href={project.href}
+                    key={repo.id}
+                    href={repo.html_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     initial={{
@@ -330,32 +301,28 @@ export function PortfolioContent() {
                     }
                     className={className}
                   >
-                    {cardBody}
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="text-xl font-semibold text-foreground group-hover:text-brand transition-colors">{repo.name}</h3>
+                      <IconGithub className="size-6 text-muted-foreground group-hover:text-brand transition-colors shrink-0 ml-4" />
+                    </div>
+                    <p className="mb-6 text-sm leading-relaxed text-muted-foreground flex-grow">
+                      {repo.description || "No description provided."}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {repo.language && (
+                        <span className="rounded-md border border-border bg-secondary/40 px-2.5 py-0.5 text-xs text-muted-foreground">
+                          {repo.language}
+                        </span>
+                      )}
+                      <span className="rounded-md border border-border bg-secondary/40 px-2.5 py-0.5 text-xs text-muted-foreground flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        {repo.stargazers_count}
+                      </span>
+                    </div>
                   </motion.a>
                 );
-              }
-
-              return (
-                <motion.div
-                  key={project.title}
-                  initial={{
-                    opacity: prefersReducedMotion ? 1 : 0,
-                    y: prefersReducedMotion ? 0 : 20,
-                  }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={viewportPear}
-                  transition={inViewTransition(index * 0.1)}
-                  whileHover={
-                    prefersReducedMotion
-                      ? undefined
-                      : { y: -10, transition: springSoft }
-                  }
-                  className={className}
-                >
-                  {cardBody}
-                </motion.div>
-              );
-            })}
+              })
+            )}
           </div>
         </div>
       </section>
