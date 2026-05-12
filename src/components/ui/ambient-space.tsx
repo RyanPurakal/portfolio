@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-/** Hero ambient photo — painted on top with blend so it isn’t erased by opaque gradients. */
+/** Full-bleed hero photo path (served from /public). */
 const HERO_AMBIENT_PHOTO = "/images/hero-ambient-photo.png";
 
 export function AmbientSpace() {
@@ -105,7 +105,7 @@ export function AmbientSpace() {
         </>
       )}
 
-      {/* Photo: on top + blend so it reads against the graded plate (was invisible under opaque fills). */}
+      {/* Photo layer — blend so it reads over the graded plate */}
       <div
         className={cn(
           "absolute inset-0 scale-[1.06] opacity-[0.48]",

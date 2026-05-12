@@ -92,9 +92,6 @@ export function ScrollStoryHero({
 
   const t = useHeroScrollTransforms(smoothProgress);
 
-  // Use state to track zoom so we can mount/dismount or control styles strictly?
-  // Let's rely entirely on motion/react for performance.
-
   if (prefersReducedMotion || !enableScrollStoryHero) {
     return (
       <section
