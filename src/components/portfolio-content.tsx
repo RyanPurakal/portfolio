@@ -4,6 +4,7 @@ import {
   HEADER_SCROLL_OFFSET,
   useLenisScroll,
 } from "@/components/lenis-provider";
+import { HERO_GITHUB_URL, HERO_LINKEDIN_URL } from "@/components/hero-social-links";
 import { ScrollStoryHero } from "@/components/scroll-story-hero";
 import { Header, type HeaderNavLink } from "@/components/ui/header-2";
 import { ImageAutoSlider } from "@/components/ui/image-auto-slider";
@@ -381,12 +382,12 @@ export function PortfolioContent() {
                 <span className="contact-link-label">{EMAIL}</span>
                 <span className="contact-link-arrow">→</span>
               </a>
-              <a className="contact-link-item" href="https://github.com/RyanPurakal" target="_blank" rel="noopener noreferrer">
+              <a className="contact-link-item" href={HERO_GITHUB_URL} target="_blank" rel="noopener noreferrer">
                 <span className="contact-link-type">GitHub</span>
                 <span className="contact-link-label">github.com/RyanPurakal</span>
                 <span className="contact-link-arrow">→</span>
               </a>
-              <a className="contact-link-item" href="https://linkedin.com/in/ryan-purakal" target="_blank" rel="noopener noreferrer">
+              <a className="contact-link-item" href={HERO_LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
                 <span className="contact-link-type">LinkedIn</span>
                 <span className="contact-link-label">linkedin.com/in/ryan-purakal</span>
                 <span className="contact-link-arrow">→</span>

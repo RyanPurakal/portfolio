@@ -1,6 +1,7 @@
 "use client";
 
 import { MockScreenshot, TabletMockup } from "@/components/device-mockups";
+import { HeroSocialLinks } from "@/components/hero-social-links";
 import { TechStackRow } from "@/components/tech-icons";
 import { HeroTitle } from "@/components/ui/hero-title";
 import { AmbientSpace } from "@/components/ui/ambient-space";
@@ -111,13 +112,14 @@ export function ScrollStoryHero({
                 className="justify-start"
               />
               <div className="mb-5 h-px max-w-md origin-left bg-[var(--border)]" />
-              <p className="hero-strapline mb-8 flex flex-wrap gap-x-[0.35em] gap-y-1">
+              <p className="hero-strapline mb-5 flex flex-wrap gap-x-[0.35em] gap-y-1">
                 {HERO_SUBTITLE.map((word) => (
                   <span key={word} className="inline-block">
                     {word}
                   </span>
                 ))}
               </p>
+              <HeroSocialLinks className="mb-8 justify-start" />
               <button
                 type="button"
                 onClick={onViewWork}
@@ -195,13 +197,14 @@ export function ScrollStoryHero({
               >
                  <motion.div className="w-full max-w-3xl" style={{ opacity: t.contentFadeOut }}>
                    <div className="mx-auto mb-5 h-px max-w-md origin-center bg-[var(--border)]" />
-                   <p className="hero-strapline mb-8 flex flex-wrap justify-center gap-x-[0.4em] gap-y-1.5">
+                   <p className="hero-strapline mb-5 flex flex-wrap justify-center gap-x-[0.4em] gap-y-1.5">
                      {HERO_SUBTITLE.map((word) => (
                        <span key={word} className="inline-block">
                          {word}
                        </span>
                      ))}
                    </p>
+                   <HeroSocialLinks className="mb-2" />
                  </motion.div>
 
                  {/* About Pop-up right under the subtitle */}
