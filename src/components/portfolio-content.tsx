@@ -125,7 +125,7 @@ export function PortfolioContent() {
             }}
           />
           <motion.div
-            className="absolute right-[-12%] top-[32%] h-[min(70vw,440px)] w-[min(70vw,440px)] rounded-full bg-teal-400/14 blur-[100px]"
+            className="absolute right-[-12%] top-[32%] h-[min(70vw,440px)] w-[min(70vw,440px)] rounded-full bg-[var(--blue-accent)]/16 blur-[100px]"
             animate={{
               x: [0, -20, 0],
               y: [0, 32, 0],
@@ -138,7 +138,7 @@ export function PortfolioContent() {
             }}
           />
           <motion.div
-            className="absolute bottom-[-8%] left-[20%] h-[min(85vw,480px)] w-[min(85vw,480px)] rounded-full bg-violet-500/10 blur-[115px]"
+            className="absolute bottom-[-8%] left-[20%] h-[min(85vw,480px)] w-[min(85vw,480px)] rounded-full bg-[var(--blue-accent)]/10 blur-[115px]"
             animate={{ opacity: [0.25, 0.4, 0.25] }}
             transition={{
               duration: 16,

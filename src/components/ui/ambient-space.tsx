@@ -29,8 +29,9 @@ export function AmbientSpace() {
           background: `
             linear-gradient(
               165deg,
-              color-mix(in srgb, var(--bg) 88%, var(--teal) 12%) 0%,
-              var(--bg) 45%,
+              color-mix(in srgb, var(--bg) 82%, var(--blue-accent) 14%) 0%,
+              color-mix(in srgb, var(--bg) 92%, var(--claret) 8%) 38%,
+              var(--bg) 52%,
               color-mix(in srgb, var(--bg) 94%, #000 6%) 100%
             )
           `,
@@ -55,7 +56,7 @@ export function AmbientSpace() {
         style={{
           background: `radial-gradient(
             100% 48% at 50% 0%,
-            color-mix(in srgb, var(--teal) 18%, transparent) 0%,
+            color-mix(in srgb, var(--blue-accent) 22%, transparent) 0%,
             transparent 52%
           )`,
         }}
@@ -85,7 +86,7 @@ export function AmbientSpace() {
       {prefersReducedMotion ? (
         <div
           className="absolute left-1/2 top-[20%] h-[min(42vh,380px)] w-[min(100vw,820px)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[110px]"
-          style={{ background: "var(--teal-dim)" }}
+          style={{ background: "var(--claret-dim)" }}
           aria-hidden
         />
       ) : (
@@ -98,7 +99,7 @@ export function AmbientSpace() {
           />
           <motion.div
             className="absolute bottom-[-6%] left-1/2 h-[min(50vh,480px)] w-[min(115vw,1000px)] -translate-x-1/2 rounded-full blur-[130px]"
-            style={{ background: "var(--teal-dim)" }}
+            style={{ background: "var(--blue-glow)" }}
             animate={{ opacity: [0.45, 0.7, 0.45] }}
             transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           />

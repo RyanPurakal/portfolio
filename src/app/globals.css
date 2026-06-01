@@ -51,10 +51,25 @@
   --surface: #0e0e0e;
   --card: #111111;
   --card-hover: #151515;
-  --teal: #4ecda4;
-  --teal-dim: rgba(78, 205, 164, 0.07);
-  --teal-border: rgba(78, 205, 164, 0.22);
-  --teal-glow: rgba(78, 205, 164, 0.12);
+
+  /* Primary accent — claret */
+  --claret: #a63b4a;
+  --claret-dim: rgba(166, 59, 74, 0.09);
+  --claret-border: rgba(166, 59, 74, 0.3);
+  --claret-glow: rgba(166, 59, 74, 0.15);
+
+  /* Secondary accent — blue */
+  --blue-accent: #4a76c4;
+  --blue-dim: rgba(74, 118, 196, 0.1);
+  --blue-border: rgba(74, 118, 196, 0.28);
+  --blue-glow: rgba(74, 118, 196, 0.18);
+
+  /* Legacy names (used across rules) → claret */
+  --teal: var(--claret);
+  --teal-dim: var(--claret-dim);
+  --teal-border: var(--claret-border);
+  --teal-glow: var(--claret-glow);
+
   --text: #dcdcdc;
   --text-muted: #686868;
   --text-dim: #333333;
@@ -67,9 +82,8 @@
   background: var(--bg);
 }
 
-/* Subtle grain overlay */
 /* ─────────────────────────────────
-   TEAL FLOOD TRANSITION
+   FLOOD TRANSITION (claret fill)
 ───────────────────────────────── */
 #flood-zone {
   height: 70vh;
@@ -101,7 +115,7 @@
   font-size: clamp(36px, 6vw, 80px);
   font-style: italic;
   font-weight: 700;
-  color: #081a13;
+  color: #14080d;
   opacity: 0;
   letter-spacing: -0.025em;
   transition: opacity 0.25s ease;

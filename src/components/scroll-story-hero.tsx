@@ -160,7 +160,7 @@ export function ScrollStoryHero({
         {/* Light accent — ambient carries most of the atmosphere */}
         <div
           className="pointer-events-none absolute right-[-5%] top-[18%] h-[min(42vw,420px)] w-[min(42vw,420px)] rounded-full blur-[100px] lg:right-0"
-          style={{ background: "var(--teal-glow)" }}
+          style={{ background: "var(--blue-glow)" }}
           aria-hidden
         />
 
