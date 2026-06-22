@@ -77,14 +77,48 @@ export type ExperienceItem = {
 
 export const experience: ExperienceItem[] = [
   {
+    title: "Undergraduate Research Intern",
+    company: "Rutgers WINLAB",
+    period: "May 2026–Aug 2026",
+    bullets: [
+      "Working on CARLA-based autonomous vehicle simulation for the CityOS project.",
+      "Simulated user interaction traces for an 8-person integrated research stack.",
+    ],
+  },
+  {
+    title: "Research Assistant (Incoming)",
+    company: "Aresty Research Program / CAIT",
+    period: "Sept 2026",
+    bullets: [
+      "Focused on AI for safe and intelligent transportation systems under PI Xiang Liu.",
+    ],
+  },
+  {
+    title: "AI Engineering Intern",
+    company: "Rutgers University Life",
+    period: "March 2026–Present",
+    bullets: [
+      "Built Project S.E.E.R., a Discord-based LLM agent with a FastAPI backend.",
+      "Implemented OpenAI RAG pipeline over scraped GetInvolved listings.",
+      "Designed DynamoDB schemas for clubs, events, and user preferences; scheduled AWS EventBridge digests.",
+    ],
+  },
+  {
     title: "Technology Director",
     company: "Health Decoded",
     companyUrl: "https://healthdecodedinitiative.org",
     period: "Dec 2025–Present",
     bullets: [
-      "Lead frontend architecture and deployment for a React platform serving 200+ users.",
-      "Ship features with a focus on accessibility, SEO, and performance budgets.",
-      "Collaborate with design and stakeholders on roadmap and technical tradeoffs.",
+      "Lead frontend architecture for a Next.js platform.",
+      "Built interactive React/Vite/TypeScript workshop tools deployed in school sessions.",
+    ],
+  },
+  {
+    title: "Student Community Manager (Incoming)",
+    company: "CS Coding and Social Lounge (CSL)",
+    period: "Aug 2026",
+    bullets: [
+      "Role begins August 2026.",
     ],
   },
   {
@@ -92,19 +126,16 @@ export const experience: ExperienceItem[] = [
     company: "RUMAD",
     period: "Oct 2025–Present",
     bullets: [
-      "Build and maintain UI for student-facing products with React and modern CSS.",
-      "Participate in code review and shared component patterns across teams.",
-      "Iterate quickly from feedback while keeping bundles lean.",
+      "Built cross-platform React Native apps with TypeScript.",
+      "Architected a reusable component library of 15+ typed primitives.",
     ],
   },
   {
-    title: "Mentor/Treasurer",
-    company: "USACS",
-    period: "Sep 2025–Present",
+    title: "Outreach Chair",
+    company: "CS Coding and Social Lounge (CSL)",
+    period: "Present",
     bullets: [
-      "Support CS community initiatives and student mentorship programs.",
-      "Manage club finances and documentation with clear reporting.",
-      "Coordinate events and cross-org collaboration.",
+      "Leads industry partnerships and student engagement.",
     ],
   },
 ];

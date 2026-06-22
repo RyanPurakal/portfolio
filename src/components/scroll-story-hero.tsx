@@ -9,7 +9,6 @@ import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 
 const HERO_NAME = ["Ryan", "Purakal"] as const;
-const HERO_SUBTITLE = ["Frontend", "Engineer", "&", "Designer"] as const;
 
 type ScrollStoryHeroProps = {
   heroImage: string;
@@ -108,14 +107,6 @@ export function ScrollStoryHero({
                 prefersReducedMotion={prefersReducedMotion}
                 className="justify-start"
               />
-              <div className="mb-5 h-px max-w-md origin-left bg-[var(--border)]" />
-              <p className="hero-strapline mb-5 flex flex-wrap gap-x-[0.35em] gap-y-1">
-                {HERO_SUBTITLE.map((word) => (
-                  <span key={word} className="inline-block">
-                    {word}
-                  </span>
-                ))}
-              </p>
               <HeroSocialLinks className="mb-8 justify-start" />
               <button
                 type="button"
@@ -185,26 +176,17 @@ export function ScrollStoryHero({
                   prefersReducedMotion={prefersReducedMotion}
                   className="justify-center"
                 />
+                <div className="pt-4 flex justify-center">
+                  <HeroSocialLinks />
+                </div>
               </motion.div>
 
-              {/* Subtitle */}
+              {/* About Pop-up right under the name */}
               <motion.div
                 className="w-full flex flex-col items-center"
                 style={{ y: t.extrasY }}
               >
-                 <motion.div className="w-full max-w-3xl" style={{ opacity: t.contentFadeOut }}>
-                   <div className="mx-auto mb-5 h-px max-w-md origin-center bg-[var(--border)]" />
-                   <p className="hero-strapline mb-5 flex flex-wrap justify-center gap-x-[0.4em] gap-y-1.5">
-                     {HERO_SUBTITLE.map((word) => (
-                       <span key={word} className="inline-block">
-                         {word}
-                       </span>
-                     ))}
-                   </p>
-                   <HeroSocialLinks className="mb-2" />
-                 </motion.div>
-
-                 {/* About Pop-up right under the subtitle */}
+                 {/* About Pop-up */}
                  <motion.div
                    className="mt-4 flex w-[90vw] max-w-lg flex-col items-center justify-center gap-6 px-2 pointer-events-auto sm:px-0"
                    style={{ opacity: t.aboutContainerOpacity, y: t.aboutY }}

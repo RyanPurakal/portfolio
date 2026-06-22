@@ -8,7 +8,7 @@ import { HERO_GITHUB_URL, HERO_LINKEDIN_URL } from "@/components/hero-social-lin
 import { ScrollStoryHero } from "@/components/scroll-story-hero";
 import { Header, type HeaderNavLink } from "@/components/ui/header-2";
 import { ImageAutoSlider } from "@/components/ui/image-auto-slider";
-import { experience, projects } from "@/data/portfolio";
+import { experience } from "@/data/portfolio";
 import { EASE_PEAR, springSoft, viewportPear } from "@/lib/motion-pear";
 import { motion, useReducedMotion } from "motion/react";
 import {
@@ -21,11 +21,10 @@ import {
 
 /** Hero portrait: 768×1024 — frame uses matching aspect */
 const HERO_IMAGE = "/images/hero-portrait.png";
-const EMAIL = "ryan.purakal@rutgers.edu";
+const EMAIL = "rjp326@scarletmail.rutgers.edu";
 
 const NAV_SECTIONS = [
   { id: "hero", label: "Home" },
-  { id: "work", label: "Work" },
   { id: "experience", label: "Experience" },
   { id: "contact", label: "Contact" },
 ] as const;
@@ -99,9 +98,9 @@ export function PortfolioContent() {
           ease: EASE_PEAR,
         };
 
-  const viewWorkClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const viewExperienceClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    scrollToId("work");
+    scrollToId("experience");
   };
 
   return (
@@ -172,63 +171,11 @@ export function PortfolioContent() {
       <ScrollStoryHero
         heroImage={HERO_IMAGE}
         prefersReducedMotion={prefersReducedMotion}
-        onViewWork={viewWorkClick}
+        onViewWork={viewExperienceClick}
       />
 
 
       <div className="editorial-design">
-        <TealFlood />
-
-        <section id="work">
-          <motion.p 
-            className="section-label"
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "0px 0px -36px 0px" }}
-          >Projects</motion.p>
-          <motion.h2 
-            className="section-title"
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: 0.09 }}
-            viewport={{ once: true, margin: "0px 0px -36px 0px" }}
-          >Selected <em>work</em></motion.h2>
-
-          <div className="work-grid">
-            {projects.map((project, index) => (
-              <motion.a
-                key={project.title}
-                href={project.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`project-card ${index % 3 === 0 ? "wide" : ""}`}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.75,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: (index % 3) * 0.09,
-                }}
-                viewport={{ once: true, margin: "0px 0px -36px 0px" }}
-              >
-                <span className="project-number">
-                  {(index + 1).toString().padStart(2, "0")}
-                </span>
-                <h3 className="project-name">{project.title}</h3>
-                <p className="project-desc">{project.description}</p>
-                <div className="project-tags">
-                  {project.tech.map((tag) => (
-                    <span key={tag} className="tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </section>
-
         <section id="experience">
           <motion.p 
             className="section-label"
@@ -303,7 +250,7 @@ export function PortfolioContent() {
             >
               <p className="section-label">Contact</p>
               <h2 className="contact-headline">Open to<br/>opportunities<em>.</em></h2>
-              <p className="contact-body">I'm looking for internships in software engineering and AI/ML for Summer/Fall 2026. If you're building something interesting, reach out.</p>
+              <p className="contact-body">I'm a sophomore at Rutgers studying CS and Data Science, currently doing research at WINLAB and interning across AI/ML and software engineering roles. Reach out if you're building something interesting.</p>
             </motion.div>
 
             <motion.div 
