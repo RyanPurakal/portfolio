@@ -2,7 +2,6 @@
 
 import { MockScreenshot, TabletMockup } from "@/components/device-mockups";
 import { HeroSocialLinks } from "@/components/hero-social-links";
-import { TechStackRow } from "@/components/tech-icons";
 import { HeroTitle } from "@/components/ui/hero-title";
 import { AmbientSpace } from "@/components/ui/ambient-space";
 import { motion, useScroll, useTransform, useSpring } from "motion/react";
@@ -196,10 +195,6 @@ export function ScrollStoryHero({
                         <p className="hero-about-copy mx-auto max-w-xl text-center">
                           I&apos;m a student at Rutgers studying Computer Science and Data Science. I&apos;m interested in frontend engineering and AI/ML. Currently, I&apos;m the Director of Technology at Health Decoded, a nonprofit teaching health literacy to youth.
                         </p>
-                        <div className="pt-4 flex flex-col items-center">
-                          <p className="section-label mb-2">Stack</p>
-                          <TechStackRow />
-                        </div>
                       </motion.div>
                       
                       {/* The View Work Transition Button */}
