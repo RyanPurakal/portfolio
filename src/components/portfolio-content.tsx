@@ -136,7 +136,7 @@ export function PortfolioContent() {
             <motion.div {...reveal(0)}>
               <p className="section-label">About</p>
               <h2 className="section-title">
-                Mostly <em>trains</em>, lately
+                A little <em>background</em>
               </h2>
             </motion.div>
 

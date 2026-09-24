@@ -45,9 +45,8 @@ export function Hero({ prefersReducedMotion, onViewWork, email }: HeroProps) {
         />
 
         <motion.p className="hero-lede max-w-xl" {...enter(0.15)}>
-          I build software and machine learning systems, and lately most of that
-          work involves trains. At Rutgers CAIT I&apos;m applying computer
-          vision to rail and transit safety.
+          I build software and machine learning systems. At Rutgers CAIT
+          I&apos;m applying computer vision to rail and transit safety.
         </motion.p>
 
         <motion.div className="mt-8" {...enter(0.3)}>
