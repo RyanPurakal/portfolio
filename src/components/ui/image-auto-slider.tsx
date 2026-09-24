@@ -13,7 +13,7 @@ export type ImageAutoSliderItem = {
 const DEFAULT_IMAGES: ImageAutoSliderItem[] = [
   {
     src: "/images/experience-slider/01.png",
-    alt: "Ryan Purakal — portrait",
+    alt: "Ryan Purakal",
   },
   {
     src: "/images/experience-slider/02.png",

@@ -13,7 +13,7 @@ export const projects: Project[] = [
   {
     title: "56 Card Game",
     description:
-      "Real-time multiplayer for four players: TypeScript rules engine, Socket.IO sync, and Expo—complete, interactive build you can hand to someone to play.",
+      "Real-time multiplayer for four players: TypeScript rules engine, Socket.IO sync, and Expo; a complete, interactive build you can hand to someone to play.",
     tech: ["TypeScript", "Expo", "Socket.IO", "Node.js"],
     screenshot: "/images/projects/56-card-game.png",
     frame: "phone",
@@ -31,7 +31,7 @@ export const projects: Project[] = [
   {
     title: "Health Decoded",
     description:
-      "Live React site for a nonprofit focused on youth health literacy—200+ users, SEO, analytics, and accessibility.",
+      "Live React site for a nonprofit focused on youth health literacy: 200+ users, SEO, analytics, and accessibility.",
     tech: ["React", "TypeScript", "SEO", "Analytics"],
     screenshot: "/images/projects/health-decoded.png",
     frame: "browser",
@@ -49,7 +49,7 @@ export const projects: Project[] = [
   {
     title: "Image Restoration Pipeline",
     description:
-      "Image restoration with PyTorch U-Net and Swin2SR via Hugging Face—training, inference, and evaluation tooling on degraded inputs.",
+      "Image restoration with PyTorch U-Net and Swin2SR via Hugging Face, with training, inference, and evaluation tooling on degraded inputs.",
     tech: ["Python", "PyTorch", "Hugging Face", "U-Net"],
     screenshot: "/images/projects/image-restoration.png",
     frame: "browser",
@@ -66,76 +66,105 @@ export const projects: Project[] = [
   },
 ];
 
+export type ExperienceGroup = "Research" | "Engineering" | "Community";
+
 export type ExperienceItem = {
   title: string;
   company: string;
   /** Optional site for the organization */
   companyUrl?: string;
   period: string;
+  group: ExperienceGroup;
   bullets: string[];
 };
 
+export const experienceGroups: ExperienceGroup[] = [
+  "Research",
+  "Engineering",
+  "Community",
+];
+
 export const experience: ExperienceItem[] = [
   {
-    title: "Undergraduate Research Intern",
-    company: "Rutgers WINLAB",
-    period: "May 2026–Aug 2026",
+    title: "Aresty Research Assistant",
+    company: "Rutgers CAIT (Center for Advanced Infrastructure & Transportation)",
+    period: "Sept 2026–Present",
+    group: "Research",
     bullets: [
-      "Working on CARLA-based autonomous vehicle simulation for the CityOS project.",
+      "Working on AI for Safe and Intelligent Transportation Systems under Prof. Xiang Liu.",
+      "Applying computer vision and machine learning to rail and transit safety.",
+    ],
+  },
+  {
+    title: "Rail Network Analysis & Modeling",
+    company: "NJ TRANSIT",
+    period: "Present",
+    group: "Research",
+    bullets: [
+      "Analyzing and modeling NJ TRANSIT's rail network, supervised by Prof. Xiang Liu.",
+    ],
+  },
+  {
+    title: "CS3 Accelerator & I-Corps",
+    company: "Columbia University",
+    period: "Present",
+    group: "Research",
+    bullets: [
+      "Part of the Columbia CS3 smart cities and streetscapes accelerator, supervised by Prof. Jorge Ortiz.",
+      "Also in the Columbia I-Corps program.",
+    ],
+  },
+  {
+    title: "Undergraduate Research Intern",
+    company: "Rutgers WINLAB (Wireless Information Network Lab)",
+    period: "May 2026–Aug 2026",
+    group: "Research",
+    bullets: [
+      "Worked on CARLA-based autonomous vehicle simulation for the CityOS project.",
       "Simulated user interaction traces for an 8-person integrated research stack.",
     ],
   },
   {
-    title: "Research Assistant (Incoming)",
-    company: "Aresty Research Program / CAIT",
-    period: "Sept 2026",
+    title: "Cofounder & Technology Director",
+    company: "Health Decoded",
+    companyUrl: "https://healthdecodedinitiative.org",
+    period: "Dec 2025–Present",
+    group: "Engineering",
     bullets: [
-      "Focused on AI for safe and intelligent transportation systems under PI Xiang Liu.",
+      "Cofounded a nonprofit that teaches health literacy to young people.",
+      "Lead frontend architecture for the Next.js platform.",
+      "Built interactive React/Vite/TypeScript workshop tools used in live school sessions.",
     ],
   },
   {
     title: "AI Engineering Intern",
     company: "Rutgers University Life",
     period: "March 2026–Present",
+    group: "Engineering",
     bullets: [
       "Built Project S.E.E.R., a Discord-based LLM agent with a FastAPI backend.",
-      "Implemented OpenAI RAG pipeline over scraped GetInvolved listings.",
+      "Implemented an OpenAI RAG pipeline over scraped GetInvolved listings.",
       "Designed DynamoDB schemas for clubs, events, and user preferences; scheduled AWS EventBridge digests.",
     ],
   },
   {
-    title: "Technology Director",
-    company: "Health Decoded",
-    companyUrl: "https://healthdecodedinitiative.org",
-    period: "Dec 2025–Present",
-    bullets: [
-      "Lead frontend architecture for a Next.js platform.",
-      "Built interactive React/Vite/TypeScript workshop tools deployed in school sessions.",
-    ],
-  },
-  {
-    title: "Student Community Manager (Incoming)",
-    company: "CS Coding and Social Lounge (CSL)",
-    period: "Aug 2026",
-    bullets: [
-      "Role begins August 2026.",
-    ],
-  },
-  {
     title: "Frontend Developer",
-    company: "RUMAD",
+    company: "RUMAD (Rutgers University Mobile App Development)",
     period: "Oct 2025–Present",
+    group: "Engineering",
     bullets: [
-      "Built cross-platform React Native apps with TypeScript.",
+      "Build cross-platform React Native apps with TypeScript.",
       "Architected a reusable component library of 15+ typed primitives.",
     ],
   },
   {
-    title: "Outreach Chair",
-    company: "CS Coding and Social Lounge (CSL)",
-    period: "Present",
+    title: "Student Community Manager",
+    company: "CSL (Coding and Social Lounge)",
+    period: "Aug 2026–Present",
+    group: "Community",
     bullets: [
-      "Leads industry partnerships and student engagement.",
+      "Organize lounge events and tutor CS students.",
+      "Lead community engagement for the lounge.",
     ],
   },
 ];

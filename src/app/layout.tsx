@@ -18,9 +18,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ryan Purakal — Frontend Engineer & Designer",
+  title: "Ryan Purakal",
   description:
-    "Portfolio of Ryan Purakal — Rutgers student in CS & Data Science. Frontend, AI/ML, and Director of Technology at Health Decoded.",
+    "Ryan Purakal, Rutgers Honors College student in CS & Data Science. Computer vision and ML research for rail and transit safety at Rutgers CAIT; cofounder of Health Decoded.",
 };
 
 export default function RootLayout({
