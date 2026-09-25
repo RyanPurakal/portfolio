@@ -8,7 +8,7 @@ import { motion } from "motion/react";
 import type { MouseEvent } from "react";
 
 const HERO_NAME = ["Ryan", "Purakal"] as const;
-const TRACKS = ["Software Engineering", "ML / AI", "Cybersecurity"] as const;
+const TRACKS = ["Software Engineering", "ML / AI"] as const;
 
 type HeroProps = {
   prefersReducedMotion: boolean;

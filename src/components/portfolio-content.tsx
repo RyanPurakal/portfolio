@@ -246,8 +246,8 @@ export function PortfolioContent() {
               <p className="section-label">Contact</p>
               <h2 className="contact-headline">Open to<br/>opportunities<em>.</em></h2>
               <p className="contact-body">
-                I&apos;m building toward roles in software engineering, ML/AI,
-                and cybersecurity. If you&apos;re working in one of those areas,
+                I&apos;m building toward roles in software engineering and ML/AI.
+                If you&apos;re working in one of those areas,
                 or on transportation systems, I&apos;d like to hear about it.
               </p>
             </motion.div>
