@@ -161,19 +161,6 @@ export function PortfolioContent() {
                 the student community manager at CSL, where I run events and
                 tutor other CS students.
               </p>
-              <p>
-                My favorite side project is a real-time, four-player version of
-                the card game{" "}
-                <a
-                  href="https://github.com/RyanPurakal/56"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  56
-                </a>
-                . Away from a keyboard, there&apos;s a fair chance I&apos;m
-                looking for a waterfall to jump off.
-              </p>
             </motion.div>
           </div>
         </section>
