@@ -142,24 +142,22 @@ export function PortfolioContent() {
 
             <motion.div className="about-copy" {...reveal(0.09)}>
               <p>
-                I&apos;m a sophomore transfer in the Rutgers Honors College,
-                studying Computer Science and Data Science.
+                I&apos;m a sophomore in the Rutgers Honors College, double
+                majoring in Computer Science and Data Science. I&apos;m most
+                interested in software engineering and ML/AI.
               </p>
               <p>
-                Most of my research sits where machine learning meets physical
-                infrastructure. With Prof. Xiang Liu at Rutgers CAIT, I&apos;m
-                working on computer vision for rail and transit safety through
-                the Aresty program, and on a separate project modeling NJ
-                TRANSIT&apos;s rail network. At Columbia I&apos;m in the CS3
-                smart streetscapes accelerator under Prof. Jorge Ortiz, and in
-                the I-Corps program.
+                Through the Aresty program at Rutgers CAIT, I work with Prof.
+                Xiang Liu on TransitTwin, a simulation platform for proposed NJ
+                TRANSIT capital projects. I&apos;m also building CityLab with a
+                team in the CS3 accelerator run by Columbia, supervised at
+                Rutgers by Prof. Jorge Ortiz, and taking part in Columbia
+                I-Corps.
               </p>
               <p>
-                Outside the lab, I cofounded Health Decoded, a health literacy
-                nonprofit, and run its technology; a lot of that means building
-                workshop tools that get used live in classrooms. I&apos;m also
-                the student community manager at CSL, where I run events and
-                tutor other CS students.
+                Outside of research, I cofounded Health Decoded and run its
+                technology, and I&apos;m the student community manager at the
+                Coding and Social Lounge, where I tutor and run events.
               </p>
             </motion.div>
           </div>
@@ -206,12 +204,16 @@ export function PortfolioContent() {
                         ) : (
                           <p className="exp-org">{exp.company}</p>
                         )}
-                        <p className="exp-period-sm">{exp.period}</p>
-                        <ul className="exp-bullets">
-                          {exp.bullets.map((b) => (
-                            <li key={b}>{b}</li>
-                          ))}
-                        </ul>
+                        {exp.period && (
+                          <p className="exp-period-sm">{exp.period}</p>
+                        )}
+                        {exp.bullets.length > 0 && (
+                          <ul className="exp-bullets">
+                            {exp.bullets.map((b) => (
+                              <li key={b}>{b}</li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                       <div className="exp-date">{exp.period}</div>
                     </motion.div>

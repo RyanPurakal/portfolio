@@ -66,105 +66,111 @@ export const projects: Project[] = [
   },
 ];
 
-export type ExperienceGroup = "Research" | "Engineering" | "Community";
+export type ExperienceGroup = "Research & Work" | "Projects" | "Leadership & Community";
 
 export type ExperienceItem = {
   title: string;
   company: string;
   /** Optional site for the organization */
   companyUrl?: string;
-  period: string;
+  period?: string;
   group: ExperienceGroup;
   bullets: string[];
 };
 
 export const experienceGroups: ExperienceGroup[] = [
-  "Research",
-  "Engineering",
-  "Community",
+  "Research & Work",
+  "Projects",
+  "Leadership & Community",
 ];
 
 export const experience: ExperienceItem[] = [
   {
     title: "Aresty Research Assistant",
     company: "Rutgers CAIT (Center for Advanced Infrastructure & Transportation)",
-    period: "Sept 2026–Present",
-    group: "Research",
+    period: "Sept 2026–April 2027",
+    group: "Research & Work",
     bullets: [
       "Working on AI for Safe and Intelligent Transportation Systems under Prof. Xiang Liu.",
-      "Applying computer vision and machine learning to rail and transit safety.",
+      "Contributing to TransitTwin, a simulation platform for proposed NJ TRANSIT capital projects.",
+      "Turn the team's rail analyses into repeatable Python (pandas) tools and bring the outputs into TransitTwin through GitLab.",
     ],
   },
   {
-    title: "Rail Network Analysis & Modeling",
-    company: "NJ TRANSIT",
+    title: "CS3 Accelerator",
+    company: "Columbia University + Rutgers University",
     period: "Present",
-    group: "Research",
+    group: "Research & Work",
     bullets: [
-      "Analyzing and modeling NJ TRANSIT's rail network, supervised by Prof. Xiang Liu.",
+      "Building CityLab with a team in the accelerator run by Columbia through the NSF Engineering Research Center for Smart Streetscapes (CS3).",
+      "Supervised at Rutgers by Prof. Jorge Ortiz.",
+      "Also participating in Columbia I-Corps.",
     ],
   },
   {
-    title: "CS3 Accelerator & I-Corps",
-    company: "Columbia University",
-    period: "Present",
-    group: "Research",
-    bullets: [
-      "Part of the Columbia CS3 smart cities and streetscapes accelerator, supervised by Prof. Jorge Ortiz.",
-      "Also in the Columbia I-Corps program.",
-    ],
-  },
-  {
-    title: "Undergraduate Research Intern",
+    title: "CityOS",
     company: "Rutgers WINLAB (Wireless Information Network Lab)",
     period: "May 2026–Aug 2026",
-    group: "Research",
+    group: "Research & Work",
     bullets: [
-      "Worked on CARLA-based autonomous vehicle simulation for the CityOS project.",
-      "Simulated user interaction traces for an 8-person integrated research stack.",
-    ],
-  },
-  {
-    title: "Cofounder & Technology Director",
-    company: "Health Decoded",
-    companyUrl: "https://healthdecodedinitiative.org",
-    period: "Dec 2025–Present",
-    group: "Engineering",
-    bullets: [
-      "Cofounded a nonprofit that teaches health literacy to young people.",
-      "Lead frontend architecture for the Next.js platform.",
-      "Built interactive React/Vite/TypeScript workshop tools used in live school sessions.",
-    ],
-  },
-  {
-    title: "AI Engineering Intern",
-    company: "Rutgers University Life",
-    period: "March 2026–Present",
-    group: "Engineering",
-    bullets: [
-      "Built Project S.E.E.R., a Discord-based LLM agent with a FastAPI backend.",
-      "Implemented an OpenAI RAG pipeline over scraped GetInvolved listings.",
-      "Designed DynamoDB schemas for clubs, events, and user preferences; scheduled AWS EventBridge digests.",
-    ],
-  },
-  {
-    title: "Frontend Developer",
-    company: "RUMAD (Rutgers University Mobile App Development)",
-    period: "Oct 2025–Present",
-    group: "Engineering",
-    bullets: [
-      "Build cross-platform React Native apps with TypeScript.",
-      "Architected a reusable component library of 15+ typed primitives.",
+      "Worked on a privacy-preserving smart-city pipeline.",
+      "Built a CARLA simulation workflow with an LLM-driven interaction loop.",
+      "Developed FAISS/RAG pipelines and synthetic trace generation.",
     ],
   },
   {
     title: "Student Community Manager",
     company: "CSL (Coding and Social Lounge)",
     period: "Aug 2026–Present",
-    group: "Community",
+    group: "Research & Work",
     bullets: [
-      "Organize lounge events and tutor CS students.",
-      "Lead community engagement for the lounge.",
+      "Peer tutoring for CS 111 through 211.",
+      "Run events like Jeopardy nights.",
+      "Handle social media and community engagement.",
     ],
+  },
+  {
+    title: "Paris Compass",
+    company: "github.com/RyanPurakal/pariscompass",
+    companyUrl: "https://github.com/RyanPurakal/pariscompass",
+    group: "Projects",
+    bullets: [
+      "Climate analytics app built with Spring Boot, React, and Gemini.",
+      "Finished full-stack application, expanded from the original HackRU hackathon version.",
+    ],
+  },
+  {
+    title: "AI Clubs & Events Agent",
+    company: "Rutgers University Life",
+    group: "Projects",
+    bullets: [
+      "Discord bot that recommends Rutgers clubs and events to students.",
+      "FAISS-based search, cron scheduling, and slash commands.",
+    ],
+  },
+  {
+    title: "Cofounder & Technology Director",
+    company: "Health Decoded",
+    companyUrl: "https://healthdecodedinitiative.org",
+    group: "Leadership & Community",
+    bullets: [],
+  },
+  {
+    title: "Day-of Committee Member",
+    company: "HackRU",
+    group: "Leadership & Community",
+    bullets: [],
+  },
+  {
+    title: "Treasurer",
+    company: "RUMAD (Rutgers Mobile App Development)",
+    group: "Leadership & Community",
+    bullets: [],
+  },
+  {
+    title: "Outreach Chair",
+    company: "USACS (Undergraduate Student Alliance of Computer Scientists)",
+    group: "Leadership & Community",
+    bullets: [],
   },
 ];
